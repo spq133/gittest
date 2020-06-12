@@ -1,3 +1,0 @@
-public class BufferedFileReader {
-    //String readLine​() 读一行文字。不读取终止符
-}
