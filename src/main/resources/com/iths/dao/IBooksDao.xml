@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iths.dao.IBooksDao">
+    <!--抽取共同代码片段-->
+    <sql id="defaultSql">   select * from books  </sql>
+    <!--查询所有-->
+    <select id="queryAllBook" resultType="books">
+        <include refid="defaultSql"/>
+    </select>
+    <!--查询一条-->
+    <select id="queryBookById" resultType="books" parameterType="java.lang.Integer">
+        select * from ssmbuild.books where bookId = #{id}
+    </select>
+    <!--增加数据-->
+    <insert id="addBook" parameterType="books">
+        insert into books(bookName,bookCounts,detail) values
+        (#{bookName},#{bookCounts},#{detail})
+    </insert>
+    <!--删除数据-->
+    <delete id="deleteBookById" parameterType="java.lang.Integer">
+        delete from ssmbuild.books where bookID = #{id}
+    </delete>
+    <!--更新一个本书-->
+    <update id="updateBook" parameterType="books">
+        update books set bookName = #{bookName},bookCounts = #{bookCounts},detail = #{detail}
+        where bookId = #{bookId}
+    </update>
+
+    <!--模糊查询-->
+    <select id="queryBookName" resultType="books" parameterType="java.lang.String">
+        select * from ssmbuild.books where bookName like #{name}
+    </select>
+</mapper>
